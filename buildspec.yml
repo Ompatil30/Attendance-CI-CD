@@ -1,0 +1,14 @@
+version: 0.2
+
+phases:
+  install:
+    commands:
+      - echo "Starting Build..."
+
+  build:
+    commands:
+      - echo "Build completed."
+
+artifacts:
+  files:
+    - '**/*'
