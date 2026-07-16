@@ -25,7 +25,7 @@ const students = [
     },
     {
         id: 5,
-        name: "Rahul Patil",
+        name: "Nikhil Patil",
         course: "Machine Learning",
         status: "Present"
     },
