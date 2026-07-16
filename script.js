@@ -1,62 +1,102 @@
-const form = document.getElementById("attendanceForm");
-const table = document.getElementById("attendanceTable");
-
-const totalStudents = document.getElementById("totalStudents");
-const presentStudents = document.getElementById("presentStudents");
-const absentStudents = document.getElementById("absentStudents");
-
-let total = 0;
-let present = 0;
-let absent = 0;
-
-form.addEventListener("submit", function(e){
-
-    e.preventDefault();
-
-    const name = document.getElementById("name").value.trim();
-    const roll = document.getElementById("roll").value.trim();
-    const department = document.getElementById("department").value.trim();
-    const status = document.getElementById("status").value;
-
-    if(name==="" || roll==="" || department==="")
+const students = [
     {
-        alert("Please fill all fields.");
-        return;
-    }
-
-    total++;
-
-    if(status==="Present")
+        id: 1,
+        name: "Om Patil",
+        course: "AWS Cloud",
+        status: "Present"
+    },
     {
-        present++;
-    }
-    else
+        id: 2,
+        name: "Mahesh Bhadane",
+        course: "Java",
+        status: "Present"
+    },
     {
-        absent++;
+        id: 3,
+        name: "Gaurav Kiran",
+        course: "Python",
+        status: "Absent"
+    },
+    {
+        id: 4,
+        name: "Sneha Sharma",
+        course: "Web Development",
+        status: "Present"
+    },
+    {
+        id: 5,
+        name: "Rahul Patil",
+        course: "Machine Learning",
+        status: "Present"
+    },
+    {
+        id: 6,
+        name: "Priya Verma",
+        course: "Data Science",
+        status: "Absent"
+    },
+    {
+        id: 7,
+        name: "Amit Joshi",
+        course: "DevOps",
+        status: "Present"
+    },
+    {
+        id: 8,
+        name: "Neha Gupta",
+        course: "Cyber Security",
+        status: "Present"
+    },
+    {
+        id: 9,
+        name: "Rohit Singh",
+        course: "Artificial Intelligence",
+        status: "Present"
+    },
+    {
+        id: 10,
+        name: "Pooja Kulkarni",
+        course: "Cloud Computing",
+        status: "Present"
     }
+];
 
-    totalStudents.innerText = total;
-    presentStudents.innerText = present;
-    absentStudents.innerText = absent;
+const table = document.getElementById("studentTable");
+const search = document.getElementById("search");
 
-    const row = document.createElement("tr");
+function loadStudents(list) {
 
-    row.innerHTML = `
-        <td>${total}</td>
-        <td>${name}</td>
-        <td>${roll}</td>
-        <td>${department}</td>
-        <td>
-            ${
-                status==="Present"
+    table.innerHTML = "";
+
+    list.forEach(student => {
+
+        const badge =
+            student.status === "Present"
                 ? '<span class="badge bg-success">Present</span>'
-                : '<span class="badge bg-danger">Absent</span>'
-            }
-        </td>
-    `;
+                : '<span class="badge bg-danger">Absent</span>';
 
-    table.appendChild(row);
+        table.innerHTML += `
+            <tr>
+                <td>${student.id}</td>
+                <td>${student.name}</td>
+                <td>${student.course}</td>
+                <td>${badge}</td>
+            </tr>
+        `;
+    });
+}
 
-    form.reset();
+loadStudents(students);
+
+search.addEventListener("keyup", () => {
+
+    const keyword = search.value.toLowerCase();
+
+    const filtered = students.filter(student =>
+        student.name.toLowerCase().includes(keyword) ||
+        student.course.toLowerCase().includes(keyword)
+    );
+
+    loadStudents(filtered);
 
 });

@@ -4,11 +4,10 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Attendance Management System</title>
+
+    <title>Attendance Management Dashboard</title>
 
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
-
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css" rel="stylesheet">
 
     <link rel="stylesheet" href="style.css">
 </head>
@@ -18,12 +17,11 @@
 <nav class="navbar navbar-dark bg-primary shadow">
     <div class="container">
         <span class="navbar-brand fw-bold">
-            <i class="bi bi-calendar-check-fill"></i>
-            Attendance Management System
+            📚 Attendance Management System
         </span>
 
         <span class="text-white">
-            CI/CD Pipeline Project
+            AWS CI/CD Project
         </span>
     </div>
 </nav>
@@ -32,29 +30,27 @@
 
     <div class="text-center mb-5">
 
-        <h2 class="fw-bold">
+        <h1 class="fw-bold">
             Student Attendance Dashboard
-        </h2>
+        </h1>
 
         <p class="text-muted">
-            Manage daily student attendance efficiently.
+            Automatically Deployed using AWS CodePipeline & Amazon S3
         </p>
 
     </div>
 
-    <div class="row g-4 mb-5">
+    <div class="row text-center mb-4">
 
-        <div class="col-md-4">
+        <div class="col-md-4 mb-3">
 
-            <div class="card dashboard-card shadow">
+            <div class="card shadow stat-card">
 
-                <div class="card-body text-center">
+                <div class="card-body">
 
-                    <i class="bi bi-people-fill display-5 text-primary"></i>
+                    <h5>Total Students</h5>
 
-                    <h5 class="mt-3">Total Students</h5>
-
-                    <h2 id="totalStudents">0</h2>
+                    <h2 id="totalStudents">10</h2>
 
                 </div>
 
@@ -62,17 +58,15 @@
 
         </div>
 
-        <div class="col-md-4">
+        <div class="col-md-4 mb-3">
 
-            <div class="card dashboard-card shadow">
+            <div class="card shadow stat-card">
 
-                <div class="card-body text-center">
+                <div class="card-body">
 
-                    <i class="bi bi-check-circle-fill display-5 text-success"></i>
+                    <h5>Present Today</h5>
 
-                    <h5 class="mt-3">Present</h5>
-
-                    <h2 id="presentStudents">0</h2>
+                    <h2 class="text-success" id="presentCount">8</h2>
 
                 </div>
 
@@ -80,17 +74,15 @@
 
         </div>
 
-        <div class="col-md-4">
+        <div class="col-md-4 mb-3">
 
-            <div class="card dashboard-card shadow">
+            <div class="card shadow stat-card">
 
-                <div class="card-body text-center">
+                <div class="card-body">
 
-                    <i class="bi bi-x-circle-fill display-5 text-danger"></i>
+                    <h5>Absent Today</h5>
 
-                    <h5 class="mt-3">Absent</h5>
-
-                    <h2 id="absentStudents">0</h2>
+                    <h2 class="text-danger" id="absentCount">2</h2>
 
                 </div>
 
@@ -102,118 +94,44 @@
 
     <div class="card shadow">
 
-        <div class="card-header bg-primary text-white">
+        <div class="card-header bg-dark text-white">
 
-            <h4>Add Attendance</h4>
+            Attendance Records
 
         </div>
 
         <div class="card-body">
 
-            <form id="attendanceForm">
+            <input
+                type="text"
+                id="search"
+                class="form-control mb-3"
+                placeholder="Search student...">
 
-                <div class="row">
+            <div class="table-responsive">
 
-                    <div class="col-md-3 mb-3">
+                <table class="table table-hover">
 
-                        <input
-                            type="text"
-                            id="name"
-                            class="form-control"
-                            placeholder="Student Name"
-                            required>
+                    <thead>
 
-                    </div>
+                        <tr>
 
-                    <div class="col-md-2 mb-3">
+                            <th>ID</th>
+                            <th>Name</th>
+                            <th>Course</th>
+                            <th>Status</th>
 
-                        <input
-                            type="text"
-                            id="roll"
-                            class="form-control"
-                            placeholder="Roll No"
-                            required>
+                        </tr>
 
-                    </div>
+                    </thead>
 
-                    <div class="col-md-3 mb-3">
+                    <tbody id="studentTable">
 
-                        <input
-                            type="text"
-                            id="department"
-                            class="form-control"
-                            placeholder="Department"
-                            required>
+                    </tbody>
 
-                    </div>
+                </table>
 
-                    <div class="col-md-2 mb-3">
-
-                        <select
-                            id="status"
-                            class="form-select">
-
-                            <option>Present</option>
-                            <option>Absent</option>
-
-                        </select>
-
-                    </div>
-
-                    <div class="col-md-2 mb-3">
-
-                        <button
-                            class="btn btn-primary w-100">
-
-                            Add
-
-                        </button>
-
-                    </div>
-
-                </div>
-
-            </form>
-
-        </div>
-
-    </div>
-
-    <div class="card shadow mt-5">
-
-        <div class="card-header bg-dark text-white">
-
-            <h4>Attendance Records</h4>
-
-        </div>
-
-        <div class="table-responsive">
-
-            <table class="table table-hover mb-0">
-
-                <thead class="table-dark">
-
-                    <tr>
-
-                        <th>#</th>
-
-                        <th>Name</th>
-
-                        <th>Roll No</th>
-
-                        <th>Department</th>
-
-                        <th>Status</th>
-
-                    </tr>
-
-                </thead>
-
-                <tbody id="attendanceTable">
-
-                </tbody>
-
-            </table>
+            </div>
 
         </div>
 
@@ -221,17 +139,21 @@
 
 </div>
 
-<footer class="bg-dark text-white mt-5">
+<footer class="text-center mt-5 mb-4">
 
-    <div class="container text-center py-4">
+    <hr>
 
-        Attendance Management System
+    <p>
 
-        <br>
+        CI/CD Pipeline for Attendance Application
 
-        AWS CodePipeline • CodeBuild • EC2
+    </p>
 
-    </div>
+    <small class="text-muted">
+
+        Hosted using Amazon S3 & AWS CodePipeline
+
+    </small>
 
 </footer>
 
